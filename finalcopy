@@ -1,0 +1,132 @@
+nome = "Glaudio"
+idade = 52 
+altura = 1.76
+peso = 86
+
+print(f"Olá, meu nome é {nome}, tenho {idade} anos, tenho {altura} de altura, peso {peso} kg.")
+
+print('--------------------------------------------------------')
+
+nome_1 = "Rebeca Oliveira "
+nome_2 = 'Juliana Macedo'
+altura_1 = 1.70
+altura_2 = 1.65
+idade_1 = 20
+idade_2 = 44
+
+print(type(nome_1)) 
+print(type(nome_2)) 
+print(type(altura_1))
+print(type(altura_2))
+print(type(idade_1))
+print(type(idade_2))
+
+print(f"nome, {nome_1} e {nome_2}, tem {idade_1} e {idade_2} anos, e tem {altura_1} e {altura_2} de altura, respectivamente.")
+print('________________________________________________________')
+
+nota_1 = 70
+nota_2 =80
+total = nota_1 + nota_2
+media = total / 2
+print(f"A média das notas {nota_1} e {nota_2} é {media}")
+print('_________________________________________________________')
+
+media = 20
+if media >= 70:
+  print('Aprovado, parabéns!')
+elif media >= 50:
+  print('Recuperação, mais uma chance!')
+else:
+  print('Reprovado, tente novamente!')
+
+print('_________________________________________________________')
+
+aprovados= (70, 75, 80, 85,95, 90, 100)
+for n in aprovados:
+  print(n, aprovados)
+while (n > 70 and n<100):
+  print(n)
+
+print('_________________________________________________________')
+  
+planetas = ["Mercurio", "Venus", "Terra", "Marte", "Júpiter", "Saturno", "Urano", "Netuno"]
+print (planetas)
+planetas[6]= "urano"
+print (planetas[6])
+print('________________________________________________________')
+  
+alunos_laudados = { "nome":"theo",   "idade": 9,  "dsm": 55,  "medicação": "ritalina"}
+nome = alunos_laudados["nome"]
+print('nome')
+idade = alunos_laudados["idade"]
+print('idade')
+dsm = alunos_laudados["dsm"]
+print('dsm')
+medicação = alunos_laudados["medicação"]
+print('medicação')
+print('_________________________________________________________')
+
+def saudacao(nome):
+  print(f"Olá {nome}, Seja bem vindo")
+nome = input("digite seu nome: ")
+saudacao(nome)
+print("_____________________________________________________")
+
+class Aluno:
+  def __init__(self, nome, matricula, curso):
+    self.nome = nome
+    self.matricula = matricula
+    self.curso = curso
+
+#dados_aluno = Aluno(input("Digite o nome do aluno: "), input("Digite a matricula do aluno: "), input("Digite o curso do aluno: "))
+
+dados_aluno = Aluno("Rebeca Andrade", "142536", "direito")
+
+print("nome: ", dados_aluno.nome)
+print("matricula: ", dados_aluno.matricula)
+print("curso: ", dados_aluno.curso)
+print("________________________________________________________")
+
+import sqlite3
+
+# Conectar ou criar o banco de dados
+conn = sqlite3.connect('alunos_python.db')
+
+# Criar uma tabela
+cursor = conn.cursor()
+
+cursor.execute('CREATE TABLE IF NOT EXISTS alunos (id INTEGER PRIMARY KEY, nome TEXT, nota REAL)')
+
+# Inserir dados
+cursor.execute('INSERT INTO alunos (id, nome, nota) VALUES (4, "João", 8.5)')
+cursor.execute('INSERT INTO alunos (id, nome, nota) VALUES (2, "Maria", 6.5)')
+cursor.execute('INSERT INTO alunos (id, nome, nota) VALUES (5, "Joaquim", 5.5)')
+
+# Consultar dados
+cursor.execute('SELECT * FROM alunos WHERE id = 1')
+#cursor.execute('SELECT * FROM alunos')
+aluno = cursor.fetchall()
+for linha in aluno:
+    print(linha)
+
+# Atualizar dados
+cursor.execute("UPDATE alunos SET nota = 7.5 WHERE id = 1")
+cursor.execute("UPDATE alunos SET nome = 'Luca - alterado' WHERE id = 1")
+
+cursor.execute('SELECT * FROM alunos WHERE id = 1')
+aluno = cursor.fetchall()
+for linha in aluno:
+    print(linha)
+
+# Apagar dados
+cursor.execute('DELETE from alunos WHERE id = 2')
+cursor.execute('SELECT * FROM alunos')
+aluno = cursor.fetchall()
+for linha in aluno:
+    print(linha)
+
+# Confirmar e fechar a conexão
+conn.commit()
+conn.close()
+
+# fim
